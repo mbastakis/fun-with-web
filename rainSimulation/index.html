@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+
+<script defer>
+    const body = document.querySelector('body');
+
+    // Get the width and height of the viewport
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    for (let i = 0; i < 100; i++) {
+        const drop = document.createElement('div');
+        drop.classList.add('drop');
+        drop.style.left = Math.random() * width + 'px';
+        drop.style.top = Math.random() * height + 'px';
+
+        setInterval(() => {
+            let top = parseInt(drop.style.top);
+            let speed = Math.sqrt((top >= 0 ? top : 0) * 2 * 9.8);
+            drop.style.top = (parseInt(drop.style.top) + speed + 10) + 'px';
+            drop.style.opacity = 1 - (parseInt(drop.style.top) / height) * .6;
+
+
+            if (parseInt(drop.style.top) > height - 10) {
+                drop.style.top = (Math.random() * -45) + 'px';
+                drop.style.left = Math.random() * width + 'px';
+            }
+        }, 1);
+        body.appendChild(drop);
+    }
+
+</script>
+
+<style>
+    body {
+        background-color: #002e5c;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .drop {
+        background-color: #fff;
+        width: 2px;
+        height: 25px;
+        position: absolute;
+    }
+</style>
+
+</html>
